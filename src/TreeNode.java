@@ -1,5 +1,6 @@
-public class TreeNode extends GraphNode {
-    private GraphNode parent;
-    private GraphNode rightSibling;
-    private GraphNode leftChild;
+public class TreeNode {
+    int key;
+    TreeNode parent;
+    TreeNode rightSibling;
+    TreeNode leftChild;
 }

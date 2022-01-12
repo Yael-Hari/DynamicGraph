@@ -1,7 +1,7 @@
-public class LinkedList {
-    private LinkedListNode head;
+public class LinkedList<F> {
+    LinkedListNode<F> head = null;
 
-    public LinkedListNode getHead() {
+    public LinkedListNode<F> getHead() {
         return head;
     }
 
@@ -12,13 +12,13 @@ public class LinkedList {
         return false;
     }
 
-    public LinkedListNode listSearch(int key){
-        LinkedListNode x = this.head;
-        while (x != null && x.getKey() != key){
-            x = x.getNext();
-        }
-        return x;
-    }
+//    public <T> LinkedListNode<F> listSearch(T value) {
+//        LinkedListNode x = this.head;
+//        while (x != null && x.getValue() != value) {
+//            x = x.getNext();
+//        }
+//        return x;
+//    }
 
     public void insertToStart(LinkedListNode newNode){
         newNode.next = this.head;
@@ -41,6 +41,25 @@ public class LinkedList {
         if (nodeToDelete.getNext() != null){
             nodeToDelete.getNext().setPrev(nodeToDelete.getPrev());
         }
+    }
+
+    public int getLength() {
+        int length = 0;
+        LinkedListNode<F> x = this.head;
+        while (x != null) {
+            length += 1;
+            x = x.getNext();
+        }
+        return length;
+    }
+
+    public void insertAfter(LinkedListNode<F> toAdd, LinkedListNode<F> thePrev) {
+        if (thePrev.next != null) {
+            thePrev.next.prev = toAdd;
+        }
+        toAdd.next = thePrev.next;
+        toAdd.prev = thePrev;
+        thePrev.next = toAdd;
     }
 }
 

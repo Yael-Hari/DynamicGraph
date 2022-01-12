@@ -1,8 +1,29 @@
-public class GraphEdge extends LinkedListNode{
-    private GraphNode fromNode;
-    private GraphNode toNode;
+public class GraphEdge {
+    GraphNode fromNode;
+    GraphNode toNode;
+    LinkedListNode<GraphEdge> refToEdgeList = null;
+    LinkedListNode<GraphEdge> refToInList = null;
+    LinkedListNode<GraphEdge> refToOutList = null;
 
 
-//    public GraphNode
+    public GraphEdge(GraphNode newFrom, GraphNode newTo){
+        this.fromNode=newFrom;
+        this.toNode=newTo;
+    }
 
+    public void setRefToEdgeList(LinkedListNode<GraphEdge> refToEdgeList) {
+        this.refToEdgeList = refToEdgeList;
+    }
+
+    public LinkedListNode<GraphEdge> getRefToEdgeList() {
+        return this.refToEdgeList;
+    }
+
+    public GraphNode getFromNode() {
+        return this.fromNode;
+    }
+
+    public GraphNode getToNode() {
+        return this.toNode;
+    }
 }

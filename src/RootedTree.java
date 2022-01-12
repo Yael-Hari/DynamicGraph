@@ -2,7 +2,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 public class RootedTree {
-    private GraphNode source;
+    private TreeNode source;
 
     public RootedTree(){
         this.source = null;

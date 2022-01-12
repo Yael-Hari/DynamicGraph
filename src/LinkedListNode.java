@@ -1,37 +1,35 @@
-public class LinkedListNode {
-    int key;
-    LinkedListNode next = null;
-    LinkedListNode prev = null;
+public class LinkedListNode<T> {
+    T value;
+    LinkedListNode<T> next = null;
+    LinkedListNode<T> prev = null;
 
     public LinkedListNode(){}
 
-    public LinkedListNode(int key){
-        this.key = key;
+    public LinkedListNode(T value){
+        this.value = value;
     }
 
-    public LinkedListNode(int key, LinkedListNode next, LinkedListNode prev){
-        this.key = key;
-        this.next = next;
-        this.prev = prev;
-    }
-
-    public LinkedListNode getPrev(){
+    public LinkedListNode<T> getPrev(){
         return this.prev;
     }
 
-    public LinkedListNode getNext(){
+    public LinkedListNode<T> getNext(){
         return this.next;
     }
 
-    public int getKey(){
-        return key;
+    public T getValue(){
+        return value;
     }
 
-    public void setNext(LinkedListNode next){
+    public void setValue(T value){
+        this.value = value;
+    }
+
+    public void setNext(LinkedListNode<T> next){
         this.next = next;
     }
 
-    public void setPrev(LinkedListNode prev){
+    public void setPrev(LinkedListNode<T> prev){
         this.prev = prev;
     }
 
