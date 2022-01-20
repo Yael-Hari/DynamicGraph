@@ -5,10 +5,13 @@ public class GraphEdge {
     LinkedListNode<GraphEdge> refToInList = null;
     LinkedListNode<GraphEdge> refToOutList = null;
 
-
     public GraphEdge(GraphNode newFrom, GraphNode newTo){
         this.fromNode=newFrom;
         this.toNode=newTo;
+    }
+
+    public void printinfo(){
+        System.out.print("("+fromNode.key+","+toNode.key+"), ");
     }
 
     public void setRefToEdgeList(LinkedListNode<GraphEdge> refToEdgeList) {

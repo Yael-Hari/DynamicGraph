@@ -5,14 +5,14 @@ public class LinkedList<F> {
         return head;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         if (this.head == null) {
             return true;
         }
         return false;
     }
 
-//    public <T> LinkedListNode<F> listSearch(T value) {
+;//    public <T> LinkedListNode<F> listSearch(T value) {
 //        LinkedListNode x = this.head;
 //        while (x != null && x.getValue() != value) {
 //            x = x.getNext();
@@ -20,9 +20,9 @@ public class LinkedList<F> {
 //        return x;
 //    }
 
-    public void insertToStart(LinkedListNode newNode){
+    public void insertToStart(LinkedListNode<F> newNode) {
         newNode.next = this.head;
-        if (this.head != null){
+        if (this.head != null) {
             this.head.setPrev(newNode);
         }
         this.head = newNode;
@@ -31,14 +31,13 @@ public class LinkedList<F> {
 
 //    didnt implement insert after, no need.
 
-    public void listDelete(LinkedListNode nodeToDelete){
-        if (nodeToDelete.getPrev() != null){
+    public void listDelete(LinkedListNode<F> nodeToDelete) {
+        if (nodeToDelete.getPrev() != null) {
             nodeToDelete.getPrev().setNext(nodeToDelete.getNext());
-        }
-        else {
+        } else {
             this.head = nodeToDelete.getNext();
         }
-        if (nodeToDelete.getNext() != null){
+        if (nodeToDelete.getNext() != null) {
             nodeToDelete.getNext().setPrev(nodeToDelete.getPrev());
         }
     }

@@ -1,6 +1,6 @@
 public class Queue<R>{
-    LinkedListNode<R> tail;
-    LinkedList<R> L;
+    LinkedListNode<R> tail = null;
+    LinkedList<R> L = new LinkedList<>();
 
     public Queue(){}
 

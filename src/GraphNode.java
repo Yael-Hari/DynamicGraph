@@ -7,9 +7,19 @@ public class GraphNode{
     int color;  //0 = white, 1 = grey, 2 = black
     int f; //time of retraction
     GraphNode parent;
+    TreeNode TreeNode = null;
 
     public GraphNode(int key){
         this.key = key;
+    }
+
+    public void printinfo(){
+        System.out.println("key is " + this.key);
+        System.out.print("inListEdges: ");
+        this.inEdges.printinfo();
+        System.out.print("outListEdges: ");
+        this.outEdges.printinfo();
+        System.out.println();
     }
 
     public void setRefToNodeList(LinkedListNode<GraphNode> refToNodeList) {

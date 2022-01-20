@@ -1,10 +1,16 @@
+import jdk.nashorn.api.tree.Tree;
+
 public class DynamicGraph {
     // linked list for graphNodes
     LinkedList<GraphNode> graphNodesList = new LinkedList<>();
     // linked list for edges
     LinkedList<GraphEdge> graphEdgesList = new LinkedList<>();
 
-    public DynamicGraph(){
+    public void printinfo(){
+        System.out.println("node list:");
+        graphNodesList.printinfo();
+        System.out.println("edge list:");
+        graphEdgesList.printinfo();
     }
 
     public GraphNode insertNode(int nodeKey){
@@ -21,13 +27,12 @@ public class DynamicGraph {
     }
 
     public GraphEdge insertEdge(GraphNode from, GraphNode to){
+
         GraphEdge addedEdge = new GraphEdge(from, to);
-        this.graphEdgesList.insertToStart(new LinkedListNode<>(addedEdge));
-        addedEdge.setRefToEdgeList(this.graphEdgesList.getHead());
-
-        from.outEdges.insertToStart(graphEdgesList.getHead());
-        to.inEdges.insertToStart(graphEdgesList.getHead());
-
+        LinkedListNode<GraphEdge> addedEdgeAsLLN = new LinkedListNode<>(addedEdge);
+        this.graphEdgesList.insertToStart(addedEdgeAsLLN);
+        from.outEdges.insertToStart(new LinkedListNode<>(addedEdge));
+        to.inEdges.insertToStart(new LinkedListNode<>(addedEdge));
         addedEdge.refToOutList = from.outEdges.getHead();
         addedEdge.refToInList = to.inEdges.getHead();
         return addedEdge;
@@ -43,38 +48,37 @@ public class DynamicGraph {
 
     public void dfs(){}
 
-    public RootedTree bfs(GraphNode source){
-        RootedTree treePi = new RootedTree();
-        TreeNode lastAssigned = new TreeNode();
+    public RootedTree bfs(GraphNode source) {
+        RootedTree GPi = new RootedTree(new TreeNode(source));
+        TreeNode lastAssigned = null;
         Queue<GraphNode> Q = new Queue<>();
         bfs_initialization(source, Q);
-        while (!Q.L.isEmpty()){
-            lastAssigned=null;
-            LinkedListNode<GraphNode> u = Q.Dequeue(); //change
-            LinkedListNode<GraphEdge> uEdgeNeighbor = u.value.outEdges.getHead();
+        while (!Q.L.isEmpty()) {
+            lastAssigned = null;
+            LinkedListNode<GraphNode> uAsLLN = Q.Dequeue();
+            LinkedListNode<GraphEdge> uEdgeNeighbor = uAsLLN.value.outEdges.getHead();
             while (uEdgeNeighbor != null) {
                 GraphNode v = uEdgeNeighbor.getValue().toNode;
                 if (v.color == 0) {
-                    v.color = 1;
-                    v.d = u.value.d + 1;
-                    v.parent = u.value;
-                    Q.Enqueue();
+                    v.TreeNode = new TreeNode(v); // other direction
+                    v.color = 1; //classic algorithm actions
+                    v.d = uAsLLN.value.d + 1; // u.d + 1
+                    v.TreeNode.parent = uAsLLN.value.TreeNode;
+                    Q.Enqueue(v.getRefToNodeList());
 
-                    if(lastAssigned==null){
-                        v.parent.leftChild = v;
+                    if (lastAssigned == null) { //making it a l.c.r.s tree
+                        uAsLLN.value.TreeNode.leftChild = v.TreeNode;
+
+                    } else {
+                        lastAssigned.rightSibling = v.TreeNode;
                     }
-                    else{
-                        lastAssigned.rightSibling=v;
-                    }
-                    lastAssigned=v;
+                    v.TreeNode.parent = uAsLLN.value.TreeNode; //u = linkedlistnode -> u.value=graphnode
+                    lastAssigned = v.TreeNode;
+                    uEdgeNeighbor = uEdgeNeighbor.getNext();
                 }
-
-
-
-
-                uEdgeNeighbor = uEdgeNeighbor.getNext();
             }
         }
+        return GPi;
     }
 
     public void bfs_initialization(GraphNode source, Queue<GraphNode> Q){
@@ -82,7 +86,6 @@ public class DynamicGraph {
         while (v != null) {
             v.value.color = 0;
             v.value.d = Integer.MAX_VALUE;
-            v.value.parent = null;
             v = v.getNext();
         }
         source.color = 1;
