@@ -27,6 +27,7 @@ public class LinkedListNode<T> {
 
     public void setNext(LinkedListNode<T> next){
         this.next = next;
+        this.next.prev = this;
     }
 
     public void setPrev(LinkedListNode<T> prev){

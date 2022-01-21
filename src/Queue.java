@@ -19,7 +19,10 @@ public class Queue<R>{
         }
         LinkedListNode<R> toReturn = this.L.getHead();
         this.L.listDelete(toReturn);
-    return toReturn;
+        if (this.L.isEmpty()){
+            this.tail = null;
+        }
+        return toReturn;
     }
 }
 

@@ -8,9 +8,6 @@ public class TreeNode {
         this.GraphNode = null;
     }
 
-    public TreeNode(GraphNode Node){
-        this.GraphNode = Node;
-    }
 
     public int getKey(){
         return this.GraphNode.getKey();

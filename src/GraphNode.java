@@ -6,8 +6,8 @@ public class GraphNode{
     int d; //BFS - distances. DFS = time of discovery
     int color;  //0 = white, 1 = grey, 2 = black
     int f; //time of retraction
-    GraphNode parent;
     TreeNode TreeNode = null;
+    GraphNode transposeNode = null;
 
     public GraphNode(int key){
         this.key = key;

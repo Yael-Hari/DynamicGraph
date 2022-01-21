@@ -60,6 +60,7 @@ public class LinkedList<F> {
         toAdd.prev = thePrev;
         thePrev.next = toAdd;
     }
+
 }
 
 
